@@ -1,0 +1,13 @@
+(load "https://github.com/hellerve/base64.carp@0.0.2")
+(load "https://github.com/hellerve/utf8.carp@master")
+
+(defmodule Base64
+  (defn to-int-ref [c]
+    (Char.to-int @c))
+
+  (defn encode-utf8 [str]
+    (Base64.encode &(copy-map to-int-ref &(chars &(UTF8.str str)))))
+
+  (defn decode-utf8 [str]
+    (UTF8.from-string &(Base64.decode-str str)))
+)

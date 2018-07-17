@@ -1,0 +1,21 @@
+(load "Test.carp")
+
+(load "base64-utf8.carp")
+
+(use-all Test Base64)
+
+(defn main []
+  (with-test test
+    (assert-equal test
+                  "aMO2eQ=="
+                  &(encode-utf8 &(UTF8.from-string "höy"))
+                  "encoding UTF8 strings works"
+    )
+    (assert-equal test
+                  &(UTF8.from-string "höy")
+                  &(decode-utf8 "aMO2eQ==")
+                  "decoding UTF8 strings works"
+    )
+    (print-test-results test)
+  )
+)
